@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="notification" nsURI="com.finantix.notification.core.model" nsPrefix="notification">
+  <eClassifiers xsi:type="ecore:EEnum" name="NotificationStatus">
+    <eLiterals name="Draft"/>
+    <eLiterals name="Approved" value="1"/>
+    <eLiterals name="Rejected" value="2"/>
+    <eLiterals name="Updated" value="3"/>
+    <eLiterals name="Published" value="4"/>
+    <eLiterals name="Expired" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotificationImage">
+    <eAnnotations source="Persistence.Resource">
+      <details key="length" value="1000000"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotificationData">
+    <eAnnotations source="texo.java.annotation">
+      <details key="type" value="@javax.persistence.AttributeOverride(name=&quot;value.l10nValues&quot;, column=@javax.persistence.Column(length=4096))"/>
+    </eAnnotations>
+    <eAnnotations source="Persistence.Sharing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="Persistence.Id">
+        <details key="GeneratedValue" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="Model.Localized"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="Model.Localized"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//NotificationStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="Persistence.Column">
+        <details key="nullable" value="false"/>
+      </eAnnotations>
+      <eAnnotations source="Persistence.Temporal">
+        <details key="field" value="TIMESTAMP"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectiveDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="Persistence.Temporal">
+        <details key="field" value="DATE"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expireDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="Persistence.Temporal">
+        <details key="field" value="DATE"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastUpdateDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="Persistence.Column">
+        <details key="nullable" value="false"/>
+      </eAnnotations>
+      <eAnnotations source="Persistence.Temporal">
+        <details key="field" value="TIMESTAMP"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sender" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pushFlag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sentFlag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="image" eType="#//NotificationImage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReadUnread">
+    <eAnnotations source="Persistence.UniqueConstraint">
+      <details key="fields" value="notificationId,agentCode"/>
+      <details key="tenant" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+      <eAnnotations source="Persistence.Id">
+        <details key="GeneratedValue" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readIndicator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notificationId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="agentCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
